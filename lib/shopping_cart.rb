@@ -8,6 +8,9 @@ class ShoppingCart
   BOOK_PRICE = 8
 
   def price
+    if @books.size == 2
+      return BOOK_PRICE * @books.size * 0.95
+    end
     if @books.size == 1
       return BOOK_PRICE
     end
