@@ -17,6 +17,11 @@ class ShoppingCartTest < Minitest::Test
     price_should_be(0)
   end
 
+  def test_one_book
+    given_books([1])
+    price_should_be(8)
+  end
+
   private
 
   def given_books(books)
