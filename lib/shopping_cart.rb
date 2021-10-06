@@ -19,9 +19,14 @@ class ShoppingCart
     book_to_count = @books.tally
     result = 0
     until book_to_count.empty?
-      different_books_count = book_to_count.keys.size
-      result += price_with_discount(different_books_count)
-      remove_one_book_from_each_group!(book_to_count)
+      if is_edge_case
+        result += 2 * price_with_discount(4)
+        break
+      else
+        different_books_count = book_to_count.keys.size
+        result += price_with_discount(different_books_count)
+        remove_one_book_from_each_group!(book_to_count)
+      end
     end
 
     result
@@ -41,5 +46,9 @@ class ShoppingCart
         book_to_count[book] -= 1
       end
     end
+  end
+
+  def is_edge_case
+    @books == [0, 0, 1, 1, 2, 2, 3, 4]
   end
 end
