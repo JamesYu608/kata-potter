@@ -13,7 +13,17 @@ class ShoppingCartTest < Minitest::Test
   end
 
   def test_no_books
-    shopping_cart = ShoppingCart.new([])
-    assert_equal 0, shopping_cart.price
+    given_books([])
+    price_should_be(0)
+  end
+
+  private
+
+  def given_books(books)
+    @shopping_cart = ShoppingCart.new(books)
+  end
+
+  def price_should_be(expected)
+    assert_equal expected, @shopping_cart.price
   end
 end
