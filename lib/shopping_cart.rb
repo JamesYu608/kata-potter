@@ -16,8 +16,10 @@ class ShoppingCart
     }.freeze
 
   def price
-    if @books.size.positive?
-      return BOOK_PRICE * @books.size * DISCOUNT_LOOKUP[@books.size]
+    books_group = @books.tally
+    unless books_group.empty?
+      different_books_count = books_group.keys.size
+      return BOOK_PRICE * different_books_count * DISCOUNT_LOOKUP[different_books_count]
     end
 
     0
