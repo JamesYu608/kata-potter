@@ -6,16 +6,16 @@ class ShoppingCart
   end
 
   BOOK_PRICE = 8
+  DISCOUNT_LOOKUP =
+    {
+      1 => 1,
+      2 => 0.95,
+      3 => 0.9
+    }.freeze
 
   def price
-    if @books.size == 3
-      return BOOK_PRICE * @books.size * 0.9
-    end
-    if @books.size == 2
-      return BOOK_PRICE * @books.size * 0.95
-    end
-    if @books.size == 1
-      return BOOK_PRICE
+    if @books.size.positive?
+      return BOOK_PRICE * @books.size * DISCOUNT_LOOKUP[@books.size]
     end
 
     0
