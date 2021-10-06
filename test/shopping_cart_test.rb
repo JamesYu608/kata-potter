@@ -42,6 +42,11 @@ class ShoppingCartTest < Minitest::Test
     price_should_be(8 * 5 * 0.75)
   end
 
+  def test_books_set_one_and_two
+    given_books([0, 0, 1])
+    price_should_be(8 + (8 * 2 * 0.95))
+  end
+
   private
 
   def given_books(books)
