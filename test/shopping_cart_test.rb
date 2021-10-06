@@ -4,14 +4,6 @@ require 'minitest/autorun'
 require_relative '../lib/shopping_cart.rb'
 
 class ShoppingCartTest < Minitest::Test
-  def setup
-    # Do nothing
-  end
-
-  def teardown
-    # Do nothing
-  end
-
   def test_no_books
     given_books([])
     price_should_be(0)
@@ -65,6 +57,19 @@ class ShoppingCartTest < Minitest::Test
   def test_edge_case_simple
     given_books([0, 0, 1, 1, 2, 2, 3, 4])
     price_should_be(2 * (8 * 4 * 0.8))
+  end
+
+  def test_edge_case_complex
+    given_books(
+      [
+        0, 0, 0, 0, 0,
+        1, 1, 1, 1, 1,
+        2, 2, 2, 2,
+        3, 3, 3, 3, 3,
+        4, 4, 4, 4
+      ]
+    )
+    price_should_be(2 * (8 * 4 * 0.8) + 3 * (8 * 5 * 0.75))
   end
 
   private
