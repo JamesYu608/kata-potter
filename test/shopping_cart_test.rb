@@ -62,6 +62,11 @@ class ShoppingCartTest < Minitest::Test
     price_should_be(8 + (8 * 5 * 0.75))
   end
 
+  def test_edge_case_simple
+    given_books([0, 0, 1, 1, 2, 2, 3, 4])
+    price_should_be(2 * (8 * 4 * 0.8))
+  end
+
   private
 
   def given_books(books)
