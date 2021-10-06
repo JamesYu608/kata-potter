@@ -16,10 +16,21 @@ class ShoppingCart
     }.freeze
 
   def price
-    books_group = @books.tally
-    unless books_group.empty?
-      different_books_count = books_group.keys.size
-      return BOOK_PRICE * different_books_count * DISCOUNT_LOOKUP[different_books_count]
+    series_to_count = @books.tally
+    unless series_to_count.empty?
+      result = 0
+      until series_to_count.empty?
+        series_count = series_to_count.keys.size
+        result += BOOK_PRICE * series_count * DISCOUNT_LOOKUP[series_count]
+        series_to_count.each do |series, count|
+          if count == 1
+            series_to_count.delete(series)
+          else
+            series_to_count[series] -= 1
+          end
+        end
+      end
+      return result
     end
 
     0
