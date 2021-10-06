@@ -5,7 +5,13 @@ class ShoppingCart
     @books = books
   end
 
+  BOOK_PRICE = 8
+
   def price
+    if @books.size == 1
+      return BOOK_PRICE
+    end
+
     0
   end
 end
